@@ -18,9 +18,9 @@ public partial class ChatServer
     /// </summary>
     /// <param name="args"> ignored. </param>
     /// <returns> A Task. Not really used. </returns>
-    private static void Main( string[] args )
+    private static void Main(string[] args)
     {
-        Server.StartServer( HandleConnect, 11_000 );
+        Server.StartServer(HandleConnect, 11_000);
         Console.Read(); // don't stop the program.
     }
 
@@ -32,19 +32,19 @@ public partial class ChatServer
     ///   </pre>
     /// </summary>
     ///
-    private static void HandleConnect( NetworkConnection connection )
+    private static void HandleConnect(NetworkConnection connection)
     {
         // handle all messages until disconnect.
         try
         {
-            while ( true )
+            while (true)
             {
-                var message = connection.ReadLine( );
+                var message = connection.ReadLine();
 
-                connection.Send( "thanks!" );
+                connection.Send("thanks!");
             }
         }
-        catch ( Exception )
+        catch (Exception)
         {
             // do anything necessary to handle a disconnected client in here
         }
