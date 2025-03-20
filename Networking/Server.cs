@@ -15,6 +15,8 @@ namespace CS3500.Networking;
 public static class Server
 {
 
+    //private static List<NetworkConnection> clients = new();
+
     /// <summary>
     ///   Wait on a TcpListener for new connections. Alert the main program
     ///   via a callback (delegate) mechanism.
@@ -24,9 +26,19 @@ public static class Server
     ///   This should be run asynchronously via a new thread.
     /// </param>
     /// <param name="port"> The port (e.g., 11000) to listen on. </param>
-    public static void StartServer( Action<NetworkConnection> handleConnect, int port )
+    public static void StartServer(Action<NetworkConnection> handleConnect, int port)
     {
-        // TODO: Implement this
-        throw new NotImplementedException();
+        TcpListener listener = new(IPAddress.Any, port);
+        listener.Start();
+
+        while (true)
+        {
+            //lock (clients)
+            //{
+            //    clients.Add(handleConnect();
+            //}
+
+            new Thread(() => handleConnect(new NetworkConnection())).Start();
+        }
     }
 }
